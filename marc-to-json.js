@@ -17,7 +17,8 @@ function convertRecords(marcRecords) {
 
   actualRecords.map(record => {
     let newBook = {
-      leader: record.slice(0, 24)
+      leader: record.slice(0, 24),
+      fields: []
     };
     const data = record.slice(24);
     const dataChunks = data.split("\x1e");
@@ -45,7 +46,7 @@ function convertRecords(marcRecords) {
       return subfieldArray;
     });
     fieldLabels.forEach((val, i) => {
-      newBook[val] = subfieldArray[i];
+      newBook.fields.push({ [val]: subfieldArray[i] });
     });
     convertedRecords.push(newBook);
   });
