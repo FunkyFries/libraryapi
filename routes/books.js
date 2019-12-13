@@ -9,15 +9,36 @@ const router = express.Router();
 //   res.redirect("/");
 // }
 
+// Search by:
+// Anywhere search
+// Barcode 852.__.p exact
+// Title 245.10.a search
+// Author 100.1_.a search
+// Subject 650._0.a search
+// Reading level 526.0_.c exact
+// Publisher 264._1.b search
+// Genre 655._7.a search
+// Series 490.1_.a search
+// ISBN 020.__.a exact
+// Call number 852.__.h + 852__.i  exact
+
+//Full Text Search Fields: 100.1_.a, 245.10.a, 245.10.c, 264._1.b, 490.1_.a, 520.__.a, 650._0.a, 655._7.a, 700.1_.a, 800.1_.a,
+
 // Get all books
 router.get("/", async (req, res) => {
-  const books = await Book.find({}).sort("name");
+  const books = await Book.find({
+    $text: { $search: "as George Beard and Harold Hutchins" }
+    // "fields.245.10.a": "Dog Man unleashed /"
+  });
+  if (req.query.any != "undefined") {
+    const result = Book.find();
+  }
   const data = { books };
   res.send(data);
 });
 
 // Get one book
-router.get("/:id", ensureAuthenticated, async (req, res) => {
+router.get("/:id", async (req, res) => {
   const book = await book.findById(req.params.id);
 
   if (!book) return res.status(404).send("book not found.");
