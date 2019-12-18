@@ -12,18 +12,18 @@ const bookSchema = new mongoose.Schema({
   }
 });
 
-
-  (245.1).a,
-  (245.1).c,
-  (264._1).b,
-  (490.1_).a,
-  (520.__).a,
-  (650._0).a,
-  (655._7).a,
-  (700.1_).a,
-  (800.1_).a;
-
-bookSchema.index({ "fields.100.1_.a": "text", "fields.245."});
+bookSchema.index({
+  "fields.100.1_.a": "text",
+  "fields.245.10.a": "text",
+  "fields.245.10.c": "text",
+  "fields.264._1.b": "text",
+  "fields.490.1_.a": "text",
+  "fields.520.__.a": "text",
+  "fields.650._0.a": "text",
+  "fields.655._7.a": "text",
+  "fields.700.1_.a": "text",
+  "fields.800.1_.a": "text"
+});
 
 const Book = mongoose.model("Book", bookSchema);
 

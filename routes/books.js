@@ -27,7 +27,7 @@ const router = express.Router();
 // Get all books
 router.get("/", async (req, res) => {
   const books = await Book.find({
-    $text: { $search: "as George Beard and Harold Hutchins" }
+    $text: { $search: "Police" }
     // "fields.245.10.a": "Dog Man unleashed /"
   });
   if (req.query.any != "undefined") {
